@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-#from sqlmodel import Field, SQLModel, Session, create_engine, select
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 from src.models.user import User, Base

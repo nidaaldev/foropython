@@ -1,11 +1,11 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, Response, status
 from ..schemas.user import UserRegister, BaseUser
 from ..services.authentication import authenticate_user
 from ..services.register_user import register_user
 
 router = APIRouter()
 
-@router.post("/register")
+@router.post("/users/register")
 async def read_user(user: UserRegister):
     try:
         await register_user(user)
@@ -15,13 +15,14 @@ async def read_user(user: UserRegister):
     return {"message": "User registered successfully"}
 
 @router.post("/login")
-async def login_user(user: BaseUser):
-        result = await authenticate_user(user)
+async def login_user(response: Response, user: BaseUser):
+        jwt = await authenticate_user(user)
 
-        if not result:
+        if not jwt:
             return HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid credentials"
             )
-
-        return result
+        
+        response.set_cookie(key="jwt", value=jwt, httponly=True)
+        return {"message": "Login successful"}

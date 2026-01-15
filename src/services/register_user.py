@@ -3,6 +3,7 @@ from ..database.db import Session
 from ..schemas.user import User as UserSchema
 from ..models.user import User
 from sqlalchemy import select, insert
+from ..security.password import hash_password
 
 async def register_user(user: UserSchema):
     with Session() as session:
@@ -11,7 +12,7 @@ async def register_user(user: UserSchema):
             .values(
                 email=user.email,
                 username=user.username,
-                password=user.password,
+                password=hash_password(user.password.encode("utf-8")),
                 creation_date=datetime.now()
             ))
 

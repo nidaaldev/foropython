@@ -19,7 +19,7 @@ class User(Base):
             f"<User "
             f"id={self.id} "
             f"email='{self.email}' "
-            f"username='{self.username}'"
+            f"username='{self.username}' "
             f"password='{self.password}' "
             f"created={self.creation_date}>"
         )

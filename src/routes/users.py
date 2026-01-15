@@ -8,7 +8,8 @@ router = APIRouter()
 async def read_user(user: User):
     try:
         await register_user(user)
-    except:
+    except Exception as err:
+        print("Error while registering user:", err)
         raise HTTPException(status_code=400, detail="User could not be registered")
-    return {"message": "User registered successfully"}, status.HTTP_201_CREATED
+    return {"message": "User registered successfully"}
 

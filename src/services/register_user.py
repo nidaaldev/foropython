@@ -1,11 +1,10 @@
 from datetime import datetime
-
 from ..database.db import Session
 from ..schemas.user import User as UserSchema
 from ..models.user import User
 from sqlalchemy import select, insert
 
-def register_user(user: UserSchema):
+async def register_user(user: UserSchema):
     with Session() as session:
         try:
             session.execute(insert(User)
@@ -17,11 +16,11 @@ def register_user(user: UserSchema):
             ))
 
             print("User registered:")
-            print(session.execute(select(User).where(User.email == user.email)).fetchone())
-            print("a")
+            result = session.execute(select(User).where(User.email == user.email)).fetchone()
+            print(result)
 
             session.commit()
         except Exception as err:
-                print("Error while regitering user:", err)
-                raise Exception("Error while registering user") from err
+                print(f"IntegrityError: {err}")
+                raise Exception("Error while registering user:",err)
 

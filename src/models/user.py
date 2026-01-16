@@ -2,9 +2,7 @@ import datetime
 
 from sqlalchemy.orm import DeclarativeBase, Mapped
 from sqlalchemy.orm import mapped_column
-
-class Base(DeclarativeBase):
-    pass
+from .base import Base
 
 class User(Base):
     __tablename__="user"

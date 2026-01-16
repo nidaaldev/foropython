@@ -6,4 +6,4 @@ from src.routes.users import router as users_router
 app = FastAPI()
 
 Base.metadata.create_all(engine)
-app.include_router(users_router, prefix="/users")
+app.include_router(users_router)

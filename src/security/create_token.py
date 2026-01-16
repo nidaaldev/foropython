@@ -16,5 +16,3 @@ def create_token(data: dict, expire_minutes: int = ACCESS_TOKEN_EXPIRE_MINUTES):
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGHORITHM)
 
 print(create_token({"user": "user1"}))
-
-# print(SECRET_KEY)

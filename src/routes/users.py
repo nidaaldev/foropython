@@ -1,11 +1,14 @@
-from fastapi import APIRouter, HTTPException, Response, status
+from fastapi import APIRouter, HTTPException, Response, status, Depends
+from starlette.requests import Request
+
 from ..schemas.user import UserRegister, BaseUser
+from ..security.dependencies import get_current_user
 from ..services.authentication import authenticate_user
 from ..services.register_user import register_user
 
 router = APIRouter()
 
-@router.post("/users/register")
+@router.post("/register")
 async def read_user(user: UserRegister):
     try:
         await register_user(user)
@@ -26,3 +29,7 @@ async def login_user(response: Response, user: BaseUser):
         
         response.set_cookie(key="jwt", value=jwt, httponly=True)
         return {"message": "Login successful"}
+
+@router.get("/dashboard")
+def get_dashboard(current_user = Depends(get_current_user)):
+     return current_user

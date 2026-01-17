@@ -1,6 +1,4 @@
 from fastapi import APIRouter, HTTPException, Response, status, Depends
-from starlette.requests import Request
-
 from ..schemas.user import UserRegister, BaseUser
 from ..security.dependencies import get_current_user
 from ..services.authentication import authenticate_user

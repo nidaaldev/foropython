@@ -1,6 +1,6 @@
 import datetime
 
-from sqlalchemy.orm import DeclarativeBase, Mapped
+from sqlalchemy.orm import DeclarativeBase, Mapped, relationship
 from sqlalchemy.orm import mapped_column
 from .base import Base
 
@@ -11,6 +11,8 @@ class User(Base):
     username: Mapped[str] = mapped_column(unique=True, nullable=False)
     password: Mapped[str] = mapped_column(nullable=False)
     creation_date: Mapped[datetime.datetime] = mapped_column(nullable=False)
+
+    threads: Mapped[list["Thread"]] = relationship(back_populates="user")
 
     def __repr__(self):
         return (

@@ -11,5 +11,5 @@ class Thread(Base):
     title: Mapped[str] = mapped_column(nullable=False)
     content: Mapped[str] = mapped_column(nullable=False)
     user_id: Mapped[int] = mapped_column(ForeignKey("user.id"), nullable=False)
-    created_at: Mapped[datetime] = mapped_column(nullable=False, default=datetime.now)
+    created_at: Mapped[datetime] = mapped_column(nullable=False)
     user: Mapped["User"] = relationship(back_populates="threads")

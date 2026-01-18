@@ -1,7 +1,8 @@
 import datetime
 
-from sqlalchemy.orm import DeclarativeBase, Mapped, relationship
+from sqlalchemy.orm import Mapped, relationship
 from sqlalchemy.orm import mapped_column
+from ..models.thread import Thread
 from .base import Base
 
 class User(Base):

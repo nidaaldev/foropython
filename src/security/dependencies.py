@@ -17,5 +17,5 @@ def get_current_user(jwt = Cookie(None)):
     user_email = payload.get("email")
 
     with Session() as session:
-        result = session.execute(select(User).where(User.email == user_email)).fetchone()
-    return result[0]
+        result = session.execute(select(User).where(User.email == user_email)).scalar_one()
+    return result

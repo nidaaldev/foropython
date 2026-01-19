@@ -16,7 +16,7 @@ class User(Base):
 
     threads: Mapped[list["Thread"]] = relationship(back_populates="user")
 
-    def __repr__(self):
+    """def __repr__(self):
         return (
             f"<User "
             f"id={self.id} "
@@ -24,4 +24,4 @@ class User(Base):
             f"username='{self.username}' "
             f"password='{self.password}' "
             f"created={self.creation_date}>"
-        )
+        )"""

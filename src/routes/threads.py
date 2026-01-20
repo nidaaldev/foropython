@@ -42,4 +42,4 @@ async def delete_thread(thread_id: int, user: User = Depends(get_current_user)):
 
     except Exception as err:
         print("Error while deleting thread:", err)
-        raise HTTPException(status_code=400, detail="Thread could not be deleted")
+        raise HTTPException(status_code=403, detail="Thread could not be deleted")
